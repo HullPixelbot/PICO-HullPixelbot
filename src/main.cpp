@@ -11,6 +11,7 @@
 
 void setup() {
   // put your setup code here, to run once:
+//  Serial.ignoreFlowControl(true);  
   Serial.begin(115200);
   Serial.println("Hello world");
   setupStorage();

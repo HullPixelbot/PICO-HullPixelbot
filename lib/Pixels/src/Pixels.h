@@ -9,7 +9,20 @@
 
 #define NO_OF_GAPS 32
 
-#define NEOPIN 12
+
+#ifdef ARDUINO_ARCH_ESP32
+
+#define NEOPIN 21
+
+#endif
+
+#ifdef ARDUINO_ARCH_PICO
+
+#define NEOPIN 6
+
+#endif
+
+
 
 //#define SERIAL_VERBOSE
 

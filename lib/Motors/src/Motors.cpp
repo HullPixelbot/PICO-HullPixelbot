@@ -22,9 +22,17 @@ struct WheelSettings
     char check;
 };
 
-bool motorUpdate(struct repeating_timer *t);
+#ifdef ARDUINO_ARCH_ESP32
+
+ESP32Timer Timer1(0);
+
+#endif
+
+#ifdef ARDUINO_ARCH_PICO
 
 RPI_PICO_Timer Timer1(1);
+
+#endif
 
 float turningCircle;
 const int countsperrev = 512 * 8; // number of microsteps per full revolution
@@ -63,8 +71,8 @@ volatile unsigned long rightTimeOfNextStep;
 volatile unsigned long currentMicros;
 volatile unsigned long leftTimeSinceLastStep;
 volatile unsigned long rightTimeSinceLastStep;
-volatile unsigned long timeToLeft;
-volatile unsigned long timeToRight;
+unsigned long timeToLeft;
+unsigned long timeToRight;
 
 // If we try to trigger an interrupt too soon after the current one
 // this causes problems. If the time to the next interrupt is less than
@@ -232,11 +240,19 @@ void setupMotors()
   loadActiveWheelSettings();
 
   setupWheelSettings();
-
-  Timer1 = RPI_PICO_Timer(1);
 }
 
+#ifdef ARDUINO_ARCH_ESP32
+
+bool motorUpdate  (void * timerNo)
+
+#endif
+
+#ifdef ARDUINO_ARCH_PICO
+
 bool motorUpdate(struct repeating_timer *t)
+
+#endif
 {
   // This method runs when a move interrupt has fired
   // The interrupts are timed to fire when the next move is due

@@ -1,5 +1,19 @@
+
+
+#ifdef ARDUINO_ARCH_ESP32
+
+#define DISTANCE_TRIG_PIN 35 
+#define DISTANCE_ECHO_PIN 34 
+
+#endif
+
+#ifdef ARDUINO_ARCH_PICO
+
 #define DISTANCE_TRIG_PIN 3 
 #define DISTANCE_ECHO_PIN 2 
+
+#endif
+
 
 enum DistanceSensorState
 {

@@ -2,6 +2,22 @@
 
 // GPIO pin numbers for motor coil connections
 
+#ifdef ARDUINO_ARCH_ESP32
+
+#define L_MOTOR_B1 13
+#define L_MOTOR_B2 12
+#define L_MOTOR_B3 14
+#define L_MOTOR_B4 27
+
+#define R_MOTOR_B1 26
+#define R_MOTOR_B2 25
+#define R_MOTOR_B3 33
+#define R_MOTOR_B4 32
+
+#endif
+
+#ifdef ARDUINO_ARCH_PICO
+
 #define L_MOTOR_B1 15
 #define L_MOTOR_B2 14
 #define L_MOTOR_B3 13
@@ -11,6 +27,11 @@
 #define R_MOTOR_B2 10
 #define R_MOTOR_B3 9
 #define R_MOTOR_B4 8
+
+#endif
+
+
+
 
 enum MoveFailReason
 {

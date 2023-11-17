@@ -73,42 +73,42 @@ bool equalsOp(int op1, int op2)
 	return op1 == op2;
 }
 
-struct logicalOp logicEquals = { "==",equalsOp };
+struct logicalOp logicEquals = { (char*)"==",equalsOp };
 
 bool notEqualsOp(int op1, int op2)
 {
 	return op1 != op2;
 }
 
-struct logicalOp logicNotEquals = { "!=",notEqualsOp };
+struct logicalOp logicNotEquals = { (char*)"!=",notEqualsOp };
 
 bool lessThanOp(int op1, int op2)
 {
 	return op1 < op2;
 }
 
-struct logicalOp logicLessThan = { "<",lessThanOp };
+struct logicalOp logicLessThan = { (char*)"<",lessThanOp };
 
 bool greaterThanOp(int op1, int op2)
 {
 	return op1 > op2;
 }
 
-struct logicalOp logicGreaterThan = { ">",greaterThanOp };
+struct logicalOp logicGreaterThan = { (char*)">",greaterThanOp };
 
 bool lessThanEqualsOp(int op1, int op2)
 {
 	return op1 <= op2;
 }
 
-struct logicalOp logicLessThanEquals = { "<=",lessThanEqualsOp };
+struct logicalOp logicLessThanEquals = { (char*)"<=",lessThanEqualsOp };
 
 bool greaterThanEqualsOp(int op1, int op2)
 {
 	return op1 >= op2;
 }
 
-struct logicalOp logicGreaterThanEquals = { ">=",greaterThanEqualsOp };
+struct logicalOp logicGreaterThanEquals = { (char*)">=",greaterThanEqualsOp };
 
 #define NUMBER_OF_LOGICAL_OPERATORS 6
 
@@ -164,7 +164,9 @@ int readDistance()
 
 int readLight()
 {
+#ifdef ARDUINO_ARCH_PICO
 	return analogRead(A2);
+#endif
 }
 
 inline bool isReadingNameStart(char * ch)
@@ -179,9 +181,9 @@ inline bool isReadingNameChar(char * ch)
 
 #define READING_START_CHAR '@'
 
-struct reading light = { "light", readLight };
+struct reading light = { (char*)"light", readLight };
 
-struct reading distance = { "distance", readDistance };
+struct reading distance = { (char*)"distance", readDistance };
 
 int readMove()
 {
@@ -191,14 +193,14 @@ int readMove()
 		return 0;
 }
 
-struct reading moving = { "moving", readMove };
+struct reading moving = { (char*)"moving", readMove };
 
 int readRandom()
 {
 	return random(1, 13);
 }
 
-struct reading randomReading = { "random", readRandom };
+struct reading randomReading = { (char*)"random", readRandom };
 
 #define NO_OF_HARDWARE_READERS 4
 
