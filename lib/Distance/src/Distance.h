@@ -9,8 +9,8 @@
 
 #ifdef ARDUINO_ARCH_PICO
 
-#define DISTANCE_TRIG_PIN 3 
-#define DISTANCE_ECHO_PIN 2 
+#define DISTANCE_TRIG_PIN 17 
+#define DISTANCE_ECHO_PIN 16 
 
 #endif
 

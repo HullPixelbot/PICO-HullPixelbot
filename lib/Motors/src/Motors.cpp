@@ -47,11 +47,11 @@ WheelSettings activeWheelSettings;
 
 const byte motorWaveformLookup[8] = {0b01000, 0b01100, 0b00100, 0b00110, 0b00010, 0b00011, 0b00001, 0b01001};
 
-volatile char leftMotorWaveformPos = 0;
-volatile char leftMotorWaveformDelta = 0;
+volatile int leftMotorWaveformPos = 0;
+volatile int leftMotorWaveformDelta = 0;
 
-volatile char rightMotorWaveformPos = 0;
-volatile char rightMotorWaveformDelta = 0;
+volatile int rightMotorWaveformPos = 0;
+volatile int rightMotorWaveformDelta = 0;
 
 volatile unsigned long leftStepCounter = 0;
 volatile unsigned long leftNumberOfStepsToMove = 1000;
@@ -97,7 +97,7 @@ void startMotors(
     bool leftForward, bool rightForward);
 
 
-void setLeft(unsigned char bits){
+void setLeft( byte bits){
   digitalWrite(L_MOTOR_B1,bits & 1);
   digitalWrite(L_MOTOR_B2,bits & 2);
   digitalWrite(L_MOTOR_B3,bits & 4);
@@ -335,7 +335,7 @@ bool motorUpdate(struct repeating_timer *t)
 
 inline void startMotor(unsigned long stepLimit, unsigned long microSecsPerPulse, bool forward,
                        volatile unsigned long *motorStepLimit, volatile unsigned long *motorPulseInterval,
-                       volatile char *motorDelta, volatile char *motorPos)
+                       volatile int *motorDelta, volatile int *motorPos)
 {
   // If we are not moving - set the delta to zero and return
 
