@@ -4,7 +4,7 @@ This is the Raspberry Pi PICO version of the Hull Pixelbot. It can also be built
 ## Putting HullOS on a PICO
 You can load HullOS onto a Raspberry Pi PICO by:
 
-1. Download the image file from (here)[HULLOSR1-3.uf2] and store it on your computer. 
+1. Download the image file from [here](HULLOSR1-3.uf2) and store it on your computer. 
 1. Hold down the BOOTSEL button on your PICO. 
 1. Plug the PICO into your PC.
 1. Release the BOOTSEL button.
