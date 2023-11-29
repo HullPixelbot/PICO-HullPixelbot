@@ -18,6 +18,8 @@ You can communicate with HullOS via any terminal program. The baud rate is set t
 *IV
 HullOS R1.3
 ```
+## Editing Python-ish programs
+You can program the robot using Python-ish. You can do this using an on-line editor you can find [here](https://github.com/HullPixelbot/Python-ishWebSerialEditor).
 ## Battery power
 The robot can be powered using 3 or 4 AA sized cells. If you use 4 cells you should make sure that the battery voltage does not exceed 6.5 volts (some batteries give out more than 1.5 volts when brand new) otherwise the PICO may not run. If you use rechargeable batteries you can use 4 with no problem as each battery only produces 1.2 volts. 
 ## Building the hardware
@@ -37,10 +39,9 @@ You can build the circuit on a breadboard as shown above. The signal pins for th
 | Right motor 3| 9| 33 |
 | Right motor 4| 8| 32 |
 | Neopixel | 6 | 21 |
-## Editing Python-ish programs
-You can program the robot using Python-ish. You can find a description of the language [here].
+
 ## Building the HullOS software
-The HullOS software is built using Platform.IO. You can edit the platformio.ini file in the repository to select the build version and deployment. At present the PICO code is deployed to the PICO debugger. You only need to do this if you want to change the assignment of the GPIO pins or add/change features. 
+The HullOS software is built using Platform.IO. You can edit the platformio.ini file in the repository to select the build version and deployment. At present the PICO code is deployed to the PICO debugger. You only need to do this if you want to change the assignment of the GPIO pins or add/change features or deploy to the ESP32 platform.
 
 Have fun
 
