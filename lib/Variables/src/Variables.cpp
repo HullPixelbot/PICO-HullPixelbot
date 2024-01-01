@@ -167,6 +167,8 @@ int readLight()
 #ifdef ARDUINO_ARCH_PICO
 	return analogRead(A2);
 #endif
+
+
 }
 
 inline bool isReadingNameStart(char * ch)

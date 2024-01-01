@@ -12,7 +12,6 @@
 
 void setup() {
   Serial.begin(115200);
-
   setupStorage();
   setupMotors();
   setupPixels();
@@ -30,7 +29,6 @@ void loop() {
   updateServer();
   updateRobot();
   updateDistanceSensor();
-  updateMotors();
   updateLightsAndDelay(!commandsNeedFullSpeed());
 }
 
