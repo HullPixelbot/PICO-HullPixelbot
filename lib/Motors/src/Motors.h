@@ -41,13 +41,13 @@ enum MoveFailReason
     Left_And_Right_Distance_Too_Large
 };
 
-// #define DEBUG_TIMED_MOVE
-// #define DEBUG_FAST_MOVE_STEPS
-// #define TIMED_MOVE_MM_DEBUG
-// #define DEBUG_TIMED_ROTATE
-// #define DEBUG_FAST_ARC
-// #define DEBUG_TIMED_ARC
-// #define DEBUG_LOAD_ACTIVE_WHEEL_SETTINGS
+#define DEBUG_TIMED_MOVE
+#define DEBUG_FAST_MOVE_STEPS
+#define TIMED_MOVE_MM_DEBUG
+#define DEBUG_TIMED_ROTATE
+#define DEBUG_FAST_ARC
+#define DEBUG_TIMED_ARC
+#define DEBUG_LOAD_ACTIVE_WHEEL_SETTINGS
 
 void setupMotors();
 MoveFailReason timedMoveSteps(long leftStepsToMove, long rightStepsToMove, float timeToMoveInSeconds);
@@ -69,3 +69,4 @@ void dumpActiveWheelSettings();
 void storeActiveWheelSettings();
 void loadActiveWheelSettings();
 void setupWheelSettings();
+void updateMotors();

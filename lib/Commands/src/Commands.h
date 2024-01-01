@@ -47,6 +47,9 @@ void setupRemoteControl();
 void updateRobot();
 bool commandsNeedFullSpeed();
 
+void sendStringToRobot(String str);
+void sendLineToRobot(String str);
+
 extern char *decodePos;
 extern char *decodeLimit;
 

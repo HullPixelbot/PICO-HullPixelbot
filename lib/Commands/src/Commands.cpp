@@ -3012,7 +3012,7 @@ void interpretSerialByte(byte b)
     }
 }
 
-void processSerialByte(byte b)
+void sendByteToRobot(byte b)
 {
 #ifdef COMMAND_DEBUG
     Serial.print(F(".**processSerialByte: "));
@@ -3028,6 +3028,27 @@ void processSerialByte(byte b)
         decodeScriptChar(b, storeReceivedByte);
         break;
     }
+}
+
+void sendStringToRobot(String str)
+{
+    for ( int i = 0 ; i < str.length(); i++)
+    {
+        sendByteToRobot(str[i]);
+    }
+}
+
+void sendNewLineToRobot()
+{
+    sendByteToRobot('\n');
+    sendByteToRobot('\r');
+}
+
+void sendLineToRobot(String str)
+{
+    sendNewLineToRobot();
+    sendStringToRobot(str);
+    sendNewLineToRobot();
 }
 
 void setupRemoteControl()
@@ -3115,7 +3136,7 @@ void updateRobot()
     while (CharsAvailable())
     {
         byte b = GetRawCh();
-        processSerialByte(b);
+        sendByteToRobot(b);
     }
 
     switch (programState)
