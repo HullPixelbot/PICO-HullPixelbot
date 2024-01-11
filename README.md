@@ -34,6 +34,9 @@ You can program the robot using Python-ish. You can do this using an on-line edi
 ## Remote editing Python-ish programs
 If your robot is powered by a PICO-W you can connect it to your local Wi-Fi and edit programs directly on the robot. It hosts a tiny web site containing the program editor. Note that before you do this you need to plug your robot into a computer and configure the network settings and the name your robot will have on your local network. You can find the configuration page [here](https://www.hullpixelbot.com/PICO-WiFi-setup.html)
 
+## PICO-W Pixelbot and Wi-Fi
+When you turn on a PICO-W pixelbot running the PICO-W version of the software the robot will try to connect to the local Wi-Fi. While it is connecting it will display a rotating magenta display on the pixels. When the robot connects successfully this display goes off and the robot runs the most recently loaded Python-is program. If the robot fails to connect to Wi-Fi it will display a rotating red display for a few seconds and then run the most recently loaded program. If you see the red display you should connect your robot to your PC and configure the Wi-Fi correctly. You can always use a serial connection to edit programs in the robot, whether it is connected to Wi-Fi or not.
+
 ![wifi configuration page](images/WifiSetup.png)
 
 Plug your robot into your PC, browser to the web page, enter your settings and then press Send to send them into the robot. You only need to do this once, when you first get the robot. Note that this only works if your robot is powered by a PICO-W. When you have set up your robot you should be able to browse to the robot on your local network. The address of your robot will have the format:
