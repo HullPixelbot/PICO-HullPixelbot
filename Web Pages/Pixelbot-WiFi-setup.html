@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hull Pixelbot Wi-Fi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="js/serial.js"></script>
+</head>
+
+<body onload="doOnLoad();">
+    <div class="container mb-2 mt-2">
+        <h1 class="mb-4">&#128421;&#65039; Hull Pixelbot Wi-Fi Setup</h1>
+    </div>
+
+    <div class="container mb-2 mt-2">
+        <div class="container mb-2 mt-2">
+            <label for="wifissid">Wi-Fi network ssid</label>
+            <input required type="text" name="wifissid" id="wifissid" class="form-control" value="">
+            <label for="wifipwd">Wi-Fi password</label>
+            <input required type="password" name="wifipwd" id="wifipwd" class="form-control" value="">
+            <label for="robotname">Name the robot will have on your local network (default is pico)</label>
+            <input required type="text" name="robotname" id="robotname" class="form-control" value="pico">
+            <button class="btn btn-primary mt-4 mb-2" onclick="doSend();">Send </button>
+        </div>
+        <div class="container mb-2 mt-2">
+            <p>Plug the robot into your computer first. Then click Send. Select the robot serial device from the menu
+                that appears.</p>
+            <p>If you don&quot;t want to send a value to the robot leave it blank.</p>
+        </div>
+        <div class="container mb-2 mt-2">
+            <textarea style="font-family:monospace;" class="w-100" rows="20" cols="120" id="output"></textarea>
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        var serial = null;
+
+        async function delay(timeInMs) {
+            return new Promise(async (kept, broken) => {
+                setTimeout(async () => {
+                    return kept("tick");
+                }, timeInMs);
+            });
+        }
+
+        function logText(text) {
+            let output = document.getElementById('output');
+            output.value = output.value + text;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        async function doOnLoad() {
+            if (!"serial" in navigator) {
+                alert("This browser does not support serial communications. Try Edge or Chrome");
+                return;
+            }
+            serial = new Serial();
+        }
+
+        async function doDisconnect() {
+            await serial.disconnect();
+        }
+
+        async function sendLine(text) {
+            await serial.sendText(`${text}\n\r`);
+        }
+
+        async function doSend() {
+
+            let wifissidElement = document.getElementById('wifissid');
+            let wifipwdElement = document.getElementById('wifipwd');
+            let nameElement = document.getElementById('robotname');
+
+            let wifissid = wifissidElement.value;
+            let wifipwd = wifipwdElement.value;
+            let name = nameElement.value;
+
+            let reply = await serial.connectToSerialPort();
+
+            if (reply != "") {
+                alert(reply);
+                return;
+            }
+
+            logText("Conncted to serial port\n");
+
+            serial.startSerialPump(logText);
+
+            await delay(2000);
+
+            reply = await serial.doCommandAndGetResponse("*IV");
+
+            if (!reply.startsWith("HullOS")) {
+                alert("Robot not connected");
+                return;
+            }
+
+            if (wifissid) {
+                let setWiFissidCommand = `*ns${wifissid}`;
+                logText("Sending WiFi ssid name\n");
+                await serial.sendCommand(setWiFissidCommand);
+            }
+            else {
+                logText("Wi-Fi ssid name not sent\n");
+            }
+
+            if (wifipwd) {
+                let setWiFiPwdCommand = `*np${wifipwd}`;
+                logText("Sending WiFi password\n");
+                await serial.sendCommand(setWiFiPwdCommand);
+            }
+            else {
+                logText("Wi-Fi password not sent\n");
+            }
+
+            if (name) {
+                let setNameCommand = `*nn${name}`;
+                logText("Sending the name of the robot\n");
+                await serial.sendCommand(setNameCommand);
+                logText(`When the robot has connected to the network you can find it at:\n`);
+                logText(`  http:\\\\${name}.local\n`);
+            }
+            else {
+                logText("Robot name not sent\n");
+            }
+
+            logText("\nRobot configured\n");
+
+            await serial.disconnect();
+
+            logText("Serial port disconnected\n");
+            logText("Unplug the robot and switch it off and on to restart it.\n\n");
+        }
+    </script>
+</body>
+
+</html>
