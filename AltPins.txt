@@ -1,0 +1,20 @@
+
+#define DISTANCE_TRIG_PIN 14 // 17 
+#define DISTANCE_ECHO_PIN 15 // 16 
+
+#define L_MOTOR_B1 10 // 15
+#define L_MOTOR_B2 11 // 14
+#define L_MOTOR_B3 12 // 13
+#define L_MOTOR_B4 13 // 12
+
+# wiring reversed coz one wheel runs fwd whilst other goes back
+#define R_MOTOR_B1 9 // 11
+#define R_MOTOR_B2 8 // 10
+#define R_MOTOR_B3 7 // 9
+#define R_MOTOR_B4 6 // 8
+
+
+#define SOUND_GPIO 16 - pwm pin 1 17 is next
+
+#define NEOPIN 6
+
